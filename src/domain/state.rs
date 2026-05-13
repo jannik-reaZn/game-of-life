@@ -1,4 +1,4 @@
-enum State {
+pub enum State {
     Live,
     Dead
 }
