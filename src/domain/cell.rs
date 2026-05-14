@@ -1,5 +1,6 @@
 use super::state::State;
 
+#[derive(Clone)]
 pub struct Cell {
     state: State,
     neighbours: Vec<Cell>,

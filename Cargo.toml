@@ -34,5 +34,5 @@ path = "tests/application/use_cases/test_handle_dead_cell.rs"
 
 [[test]]
 name = "test_run_one_generation"
-path = "test/application/use_cases/test_run_one_generation.rs"
+path = "tests/application/use_cases/test_run_one_generation.rs"
 

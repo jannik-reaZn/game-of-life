@@ -1,12 +1,12 @@
 use crate::application::use_cases::run_one_generation::run_one_generation;
 use crate::domain::cell::Cell;
 
-struct Board {
-    cells: Vec<Cell>,
+pub struct Board {
+    cells: Vec<Vec<Cell>>,
 }
 
 impl Board {
-    pub fn new(cells: Vec<Cell>) -> Self {
+    pub fn new(cells: Vec<Vec<Cell>>) -> Self {
         Board { cells }
     }
 
@@ -16,7 +16,7 @@ impl Board {
         Board { cells: new_cells }
     }
 
-    pub fn cells(&self) -> &Vec<Cell> {
+    pub fn cells(&self) -> &Vec<Vec<Cell>> {
         &self.cells
     }
 }
