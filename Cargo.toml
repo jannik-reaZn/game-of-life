@@ -26,8 +26,9 @@ path = "tests/domain/rules/test_survive_rule.rs"
 
 [[test]]
 name = "test_handle_living_cell"
-path = "tests/domain/test_handle_living_cell.rs"
+path = "tests/application/use_cases/test_handle_living_cell.rs"
 
 [[test]]
 name = "test_handle_dead_cell"
-path = "tests/domain/test_handle_dead_cell.rs"
+path = "tests/application/use_cases/test_handle_dead_cell.rs"
+
