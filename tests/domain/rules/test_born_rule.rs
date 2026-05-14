@@ -1,5 +1,5 @@
 use game_of_life::domain::cell::Cell;
-use game_of_life::domain::rules::born;
+use game_of_life::domain::rules::should_be_born;
 use game_of_life::domain::state::State;
 use rstest::rstest;
 
@@ -9,7 +9,7 @@ fn test_dead_cell_is_born() {
     let cell = Cell::new(State::Dead, Cell::create_neighbours(3));
 
     // WHEN
-    let shoud_be_born = born(&cell);
+    let shoud_be_born = should_be_born(&cell);
 
     // THEN
     assert_eq!(shoud_be_born, true);
@@ -23,7 +23,7 @@ fn test_dead_cell_stays_dead(#[case] living_cells: usize) {
     let cell = Cell::new(State::Dead, Cell::create_neighbours(living_cells));
 
     // WHEN
-    let should_be_born = born(&cell);
+    let should_be_born = should_be_born(&cell);
 
     // THEN
     assert_eq!(should_be_born, false);
@@ -35,7 +35,7 @@ fn test_living_cell_stays_alive() {
     let cell = Cell::new(State::Live, Cell::create_neighbours(1));
 
     // WHEN
-    let should_be_born = born(&cell);
+    let should_be_born = should_be_born(&cell);
 
     // THEN
     assert_eq!(should_be_born, false);

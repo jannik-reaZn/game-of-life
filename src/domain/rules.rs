@@ -2,7 +2,7 @@ use super::cell::Cell;
 use super::state::State;
 
 /// A live cell with two or three live neighbours survives.
-pub fn survive(cell: &Cell) -> bool {
+pub fn should_survive(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => {
             let living_neighbour_cells = cell.count_living_neighbour_cells();
@@ -16,7 +16,7 @@ pub fn survive(cell: &Cell) -> bool {
 }
 
 /// A dead cell with exactly three live neighbours becomes a live cell.
-pub fn born(cell: &Cell) -> bool {
+pub fn should_be_born(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => false,
         State::Dead => {
@@ -29,8 +29,8 @@ pub fn born(cell: &Cell) -> bool {
     }
 }
 
-/// A live cell with fewer than two or more than three live neighbours die
-pub fn die(cell: &Cell) -> bool {
+/// A live cell with fewer than two or more than three live neighbours should_die
+pub fn should_die(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => {
             let living_neighbour_cells = cell.count_living_neighbour_cells();
@@ -59,9 +59,9 @@ pub fn die(cell: &Cell) -> bool {
 pub fn handle_living_cell(cell: &mut Cell) -> &mut Cell {
     match cell.state() {
         State::Live => {
-            if survive(cell) {
+            if should_survive(cell) {
                 cell.set_state(State::Live);
-            } else if die(cell) {
+            } else if should_die(cell) {
                 cell.set_state(State::Dead);
             }
 
@@ -76,7 +76,7 @@ pub fn handle_dead_cell(cell: &mut Cell) -> &mut Cell {
     match cell.state() {
         State::Live => cell,
         State::Dead => {
-            if born(cell) {
+            if should_be_born(cell) {
                 cell.set_state(State::Live);
             }
             cell

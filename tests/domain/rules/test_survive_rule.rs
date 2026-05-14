@@ -1,5 +1,5 @@
 use game_of_life::domain::cell::Cell;
-use game_of_life::domain::rules::survive;
+use game_of_life::domain::rules::should_survive;
 use game_of_life::domain::state::State;
 use rstest::rstest;
 
@@ -11,7 +11,7 @@ fn test_living_cell_has_survived(#[case] living_cells: usize) {
     let cell = Cell::new(State::Live, Cell::create_neighbours(living_cells));
 
     // WHEN
-    let has_survived = survive(&cell);
+    let has_survived = should_survive(&cell);
 
     // THEN
     assert_eq!(has_survived, true);
@@ -25,7 +25,7 @@ fn test_living_cell_has_not_survived(#[case] living_cells: usize) {
     let cell = Cell::new(State::Live, Cell::create_neighbours(living_cells));
 
     // WHEN
-    let has_survived = survive(&cell);
+    let has_survived = should_survive(&cell);
 
     // THEN
     assert_eq!(has_survived, false);
@@ -37,7 +37,7 @@ fn test_dead_cell_unchanged() {
     let cell = Cell::new(State::Dead, Cell::create_neighbours(1));
 
     // WHEN
-    let has_survived = survive(&cell);
+    let has_survived = should_survive(&cell);
 
     // THEN
     assert_eq!(has_survived, false);
