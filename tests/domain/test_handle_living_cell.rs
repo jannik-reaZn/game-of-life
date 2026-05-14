@@ -1,7 +1,7 @@
 use game_of_life::domain::cell::Cell;
 use game_of_life::domain::rules::handle_living_cell;
 use game_of_life::domain::state::State;
-use rstest::*;
+use rstest::rstest;
 
 #[rstest]
 #[case(2)]

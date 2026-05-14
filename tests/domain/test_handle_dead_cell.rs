@@ -1,7 +1,7 @@
 use game_of_life::domain::cell::Cell;
 use game_of_life::domain::rules::handle_dead_cell;
 use game_of_life::domain::state::State;
-use rstest::*;
+use rstest::rstest;
 
 #[test]
 fn test_handle_dead_cell_revives_when_exactly_three_neighbours_are_live() {

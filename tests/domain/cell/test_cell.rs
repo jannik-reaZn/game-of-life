@@ -1,6 +1,8 @@
 use game_of_life::domain::cell::Cell;
 use game_of_life::domain::state::State;
 
+use rstest::rstest;
+
 #[test]
 fn test_cell_state() {
     // GIVEN
@@ -48,4 +50,19 @@ fn test_set_cell_state() {
 
     // THEN
     assert_eq!(cell.state(), State::Dead);
+}
+
+#[rstest]
+#[case(1)]
+#[case(4)]
+#[case(8)]
+fn test_count_living_neighbour_cell(#[case] living_cells: usize) {
+    // GIVEN
+    let neighbours = Cell::create_neighbours(living_cells);
+
+    // WHEN
+    let living_cells = neighbours.count_living_cells();
+
+    // THEN
+    assert_eq!(living_cells)
 }
