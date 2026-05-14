@@ -54,32 +54,3 @@ pub fn should_die(cell: &Cell) -> bool {
 
 //     }
 // }
-
-// 2.1 If state is "Life", then either survive or die
-pub fn handle_living_cell(cell: &mut Cell) -> &mut Cell {
-    match cell.state() {
-        State::Live => {
-            if should_survive(cell) {
-                cell.set_state(State::Live);
-            } else if should_die(cell) {
-                cell.set_state(State::Dead);
-            }
-
-            cell
-        }
-        State::Dead => cell,
-    }
-}
-
-// 2.2 If state is "Dead", then either born or nothing
-pub fn handle_dead_cell(cell: &mut Cell) -> &mut Cell {
-    match cell.state() {
-        State::Live => cell,
-        State::Dead => {
-            if should_be_born(cell) {
-                cell.set_state(State::Live);
-            }
-            cell
-        }
-    }
-}

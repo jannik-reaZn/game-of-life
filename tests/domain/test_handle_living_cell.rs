@@ -1,5 +1,5 @@
+use game_of_life::application::use_cases::handle_living_cell_use_case::handle_living_cell;
 use game_of_life::domain::cell::Cell;
-use game_of_life::domain::rules::handle_living_cell;
 use game_of_life::domain::state::State;
 use rstest::rstest;
 
