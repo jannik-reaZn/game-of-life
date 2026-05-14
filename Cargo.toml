@@ -36,4 +36,5 @@ path = "tests/application/use_cases/test_run_one_generation.rs"
 
 [dependencies]
 pixels = "0.17.1"
+winit = "0.30.13"
 
