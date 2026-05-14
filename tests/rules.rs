@@ -23,10 +23,32 @@ fn test_survive_rule() {
 
 #[test]
 fn test_born_rule() {
-    assert_eq!(born(), true);
+    let neighbours = vec![
+        Cell::new(State::Live, Vec::new()),
+        Cell::new(State::Live, Vec::new()),
+        Cell::new(State::Live, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+    ];
+    let cell = Cell::new(State::Dead, neighbours);
+    assert_eq!(born(cell), true);
 }
 
 #[test]
 fn test_die_rule() {
-    assert_eq!(die(), true);
+    let neighbours = vec![
+        Cell::new(State::Live, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+        Cell::new(State::Dead, Vec::new()),
+    ];
+    let cell = Cell::new(State::Dead, neighbours);
+    assert_eq!(die(cell), true);
 }
