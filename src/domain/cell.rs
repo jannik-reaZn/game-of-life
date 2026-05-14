@@ -2,17 +2,14 @@ use super::state::State;
 
 pub struct Cell {
     state: State,
-    neighbours: Vec<Cell>
+    neighbours: Vec<Cell>,
 }
 
 const MAX_NEIGHBOUR_CELLS: usize = 8;
 
 impl Cell {
     pub fn new(state: State, neighbours: Vec<Cell>) -> Self {
-        Self {
-            state,
-            neighbours
-        }
+        Self { state, neighbours }
     }
 
     pub fn state(&self) -> State {

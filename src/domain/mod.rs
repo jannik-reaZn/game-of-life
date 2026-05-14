@@ -1,3 +1,3 @@
-pub mod rules;
 pub mod cell;
+pub mod rules;
 pub mod state;

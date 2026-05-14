@@ -11,7 +11,6 @@ fn test_cell_state() {
     assert!(cell.neighbours().is_empty());
 }
 
-
 #[test]
 fn test_cell_neighbours() {
     // GIVEN
