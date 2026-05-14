@@ -45,19 +45,24 @@ pub fn born(cell: &Cell) -> bool {
 
 /// A live cell with fewer than two or more than three live neighbours die
 pub fn die(cell: &Cell) -> bool {
-    let neighbours = cell.neighbours();
-    let mut nof_life_neighbours = 0 as i8;
-    for neighbour in neighbours {
-        match neighbour.state() {
-            State::Live => nof_life_neighbours += 1,
-            State::Dead => continue,
-        }
-    }
+    match cell.state() {
+        State::Live => {
+            let neighbours = cell.neighbours();
+            let mut nof_life_neighbours = 0 as i8;
+            for neighbour in neighbours {
+                match neighbour.state() {
+                    State::Live => nof_life_neighbours += 1,
+                    State::Dead => continue,
+                }
+            }
 
-    if nof_life_neighbours < 2 || nof_life_neighbours > 3 {
-        return true;
+            if nof_life_neighbours < 2 || nof_life_neighbours > 3 {
+                return true;
+            }
+            false
+        }
+        State::Dead => false,
     }
-    false
 }
 
 // pub fn game_of_live_orchestrator(cells: Vec<Cell>) {
