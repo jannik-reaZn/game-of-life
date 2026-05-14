@@ -17,6 +17,10 @@ impl Cell {
         self.state
     }
 
+    pub fn set_state(&mut self, state: State) {
+        self.state = state;
+    }
+
     pub fn neighbours(&self) -> &Vec<Cell> {
         &self.neighbours
     }
