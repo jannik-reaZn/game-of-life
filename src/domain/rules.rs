@@ -5,15 +5,8 @@ use super::state::State;
 pub fn survive(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => {
-            let neighbours = cell.neighbours();
-            let mut nof_life_neighbours = 0 as i8;
-            for neighbour in neighbours {
-                match neighbour.state() {
-                    State::Live => nof_life_neighbours += 1,
-                    State::Dead => continue,
-                }
-            }
-            if nof_life_neighbours == 2 || nof_life_neighbours == 3 {
+            let living_neighbour_cells = cell.count_living_neighbour_cells();
+            if living_neighbour_cells == 2 || living_neighbour_cells == 3 {
                 return true;
             }
             false
@@ -22,20 +15,13 @@ pub fn survive(cell: &Cell) -> bool {
     }
 }
 
-/// A dead cell with exactly three live neighbours becoomes a live cell.
+/// A dead cell with exactly three live neighbours becomes a live cell.
 pub fn born(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => false,
         State::Dead => {
-            let neighbours = cell.neighbours();
-            let mut nof_life_neighbours = 0 as i8;
-            for neighbour in neighbours {
-                match neighbour.state() {
-                    State::Live => nof_life_neighbours += 1,
-                    State::Dead => continue,
-                }
-            }
-            if nof_life_neighbours == 3 {
+            let living_neighbour_cells = cell.count_living_neighbour_cells();
+            if living_neighbour_cells == 3 {
                 return true;
             }
             false
@@ -47,16 +33,8 @@ pub fn born(cell: &Cell) -> bool {
 pub fn die(cell: &Cell) -> bool {
     match cell.state() {
         State::Live => {
-            let neighbours = cell.neighbours();
-            let mut nof_life_neighbours = 0 as i8;
-            for neighbour in neighbours {
-                match neighbour.state() {
-                    State::Live => nof_life_neighbours += 1,
-                    State::Dead => continue,
-                }
-            }
-
-            if nof_life_neighbours < 2 || nof_life_neighbours > 3 {
+            let living_neighbour_cells = cell.count_living_neighbour_cells();
+            if living_neighbour_cells < 2 || living_neighbour_cells > 3 {
                 return true;
             }
             false
