@@ -18,7 +18,7 @@ pub fn survive(cell: &Cell) -> bool {
 }
 
 /// A dead cell with exactly three live neighbours becoomes a live cell.
-pub fn born(cell: Cell) -> bool {
+pub fn born(cell: &Cell) -> bool {
     let neighbours = cell.neighbours();
     let mut nof_life_neighbours = 0 as i8;
     for neighbour in neighbours {
@@ -79,9 +79,14 @@ pub fn handle_living_cell(cell: &mut Cell) -> &mut Cell {
 }
 
 // // 2.2 If state is "Dead", then either born or nothing
-// pub fn handle_dead_cell(cell: Cell) {
-//     if born(cell) {
-//         return "dead"
-//     }
-//     return
-// }
+pub fn handle_dead_cell(cell: &mut Cell) -> &mut Cell {
+    match cell.state() {
+        State::Live => cell,
+        State::Dead => {
+            if born(cell) {
+                cell.set_state(State::Live);
+            }
+            cell
+        }
+    }
+}
