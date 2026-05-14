@@ -15,12 +15,27 @@ fn test_cell_state() {
 #[test]
 fn test_cell_neighbours() {
     // GIVEN
-    let neighbour = Cell::new(State::Live, Vec::new());
-    let cell = Cell::new(State::Live, vec![neighbour]);
+    let cell = Cell::new(State::Live, Cell::create_neighbours(1));
 
     // THEN
     assert_eq!(cell.state(), State::Live);
-    assert_eq!(cell.neighbours().len(), 1);
+    assert_eq!(cell.neighbours().len(), 8);
+}
+
+#[test]
+fn test_create_neighbours_factory() {
+    // GIVEN
+    let neighbours = Cell::create_neighbours(3);
+
+    // THEN
+    assert_eq!(neighbours.len(), 8);
+    assert_eq!(
+        neighbours
+            .iter()
+            .filter(|neighbour| neighbour.state() == State::Live)
+            .count(),
+        3
+    );
 }
 
 #[test]
