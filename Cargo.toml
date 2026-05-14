@@ -3,8 +3,6 @@ name = "game-of-life"
 version = "0.1.0"
 edition = "2024"
 
-[dependencies]
-
 [dev-dependencies]
 rstest = "0.26.1"
 
@@ -35,4 +33,7 @@ path = "tests/application/use_cases/test_handle_dead_cell.rs"
 [[test]]
 name = "test_run_one_generation"
 path = "tests/application/use_cases/test_run_one_generation.rs"
+
+[dependencies]
+pixels = "0.17.1"
 
