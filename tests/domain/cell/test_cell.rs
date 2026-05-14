@@ -59,10 +59,11 @@ fn test_set_cell_state() {
 fn test_count_living_neighbour_cell(#[case] living_cells: usize) {
     // GIVEN
     let neighbours = Cell::create_neighbours(living_cells);
+    let cell = Cell::new(State::Live, neighbours);
 
     // WHEN
-    let living_cells = neighbours.count_living_cells();
+    let counted_living_cells = cell.count_living_neighbour_cells();
 
     // THEN
-    assert_eq!(living_cells)
+    assert_eq!(counted_living_cells, living_cells)
 }

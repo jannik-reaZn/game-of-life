@@ -41,4 +41,11 @@ impl Cell {
 
         neighbours
     }
+
+    pub fn count_living_neighbour_cells(&self) -> usize {
+        self.neighbours
+            .iter()
+            .filter(|neighbour| neighbour.state() == State::Live)
+            .count()
+    }
 }
