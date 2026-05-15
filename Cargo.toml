@@ -8,7 +8,11 @@ rstest = "0.26.1"
 
 [[test]]
 name = "test_cell"
-path = "tests/domain/cell/test_cell.rs"
+path = "tests/domain/test_cell.rs"
+
+[[test]]
+name = "test_board"
+path = "tests/domain/test_board.rs"
 
 [[test]]
 name = "test_born_rule"
