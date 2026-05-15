@@ -1,6 +1,7 @@
 use crate::domain::board::Board;
 use crate::domain::cell::Cell;
 use crate::domain::state::State;
+use crate::presentation::cell_renderer::{CellStateRenderer, Renderable};
 
 // Interface for rendering the board
 pub trait BoardRenderer {
@@ -21,13 +22,26 @@ impl TerminalBoardRenderer {
     }
 }
 
+// Implement the BoardRenderer trait for TerminalBoardRenderer
 impl BoardRenderer for TerminalBoardRenderer {
     fn seed(&mut self) {
-        self.board = Board::new(vec![vec![
-            Cell::new(State::Dead, Cell::create_neighbours(0)),
-            Cell::new(State::Live, Cell::create_neighbours(1)),
-            Cell::new(State::Dead, Cell::create_neighbours(0)),
-        ]]);
+        self.board = Board::new(vec![
+            vec![
+                Cell::new(State::Dead, Cell::create_neighbours(0)),
+                Cell::new(State::Live, Cell::create_neighbours(1)),
+                Cell::new(State::Dead, Cell::create_neighbours(0)),
+            ],
+            vec![
+                Cell::new(State::Dead, Cell::create_neighbours(3)),
+                Cell::new(State::Live, Cell::create_neighbours(2)),
+                Cell::new(State::Dead, Cell::create_neighbours(3)),
+            ],
+            vec![
+                Cell::new(State::Dead, Cell::create_neighbours(0)),
+                Cell::new(State::Live, Cell::create_neighbours(1)),
+                Cell::new(State::Dead, Cell::create_neighbours(0)),
+            ],
+        ]);
     }
 
     fn render(&self) -> String {
@@ -36,10 +50,11 @@ impl BoardRenderer for TerminalBoardRenderer {
             .iter()
             .map(|row| {
                 row.iter()
-                    .map(|cell| match cell.is_alive() {
-                        true => 'O',
-                        false => '.',
+                    .map(|cell| {
+                        let renderer = CellStateRenderer::new(cell.state());
+                        renderer.render()
                     })
+                    .map(|c| format!("{} ", c))
                     .collect::<String>()
             })
             .collect::<Vec<String>>()

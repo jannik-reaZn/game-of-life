@@ -1,11 +1,17 @@
 use crate::domain::state::State;
 
-struct CellStateRenderer {
+pub struct CellStateRenderer {
     state: State,
 }
 
-trait Renderable {
+pub trait Renderable {
     fn render(&self) -> char;
+}
+
+impl CellStateRenderer {
+    pub fn new(state: State) -> Self {
+        CellStateRenderer { state }
+    }
 }
 
 impl Renderable for CellStateRenderer {
