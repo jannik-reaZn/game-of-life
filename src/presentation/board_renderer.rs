@@ -3,10 +3,11 @@ use crate::domain::board::Board;
 use crate::domain::cell::Cell;
 use crate::domain::state::State;
 use crate::presentation::cell_renderer::{CellStateRenderer, Renderable};
+use rand::Rng;
 
 // Interface for rendering the board
 pub trait BoardRenderer {
-    fn seed(&mut self);
+    fn seed(&mut self, size: usize);
     fn run_one_generation(&mut self);
     fn render(&self) -> String;
 }
@@ -32,24 +33,25 @@ impl TerminalBoardRenderer {
 
 // Implement the BoardRenderer trait for TerminalBoardRenderer
 impl BoardRenderer for TerminalBoardRenderer {
-    fn seed(&mut self) {
-        self.board = Board::new(vec![
-            vec![
-                Cell::new(State::Dead),
-                Cell::new(State::Live),
-                Cell::new(State::Dead),
-            ],
-            vec![
-                Cell::new(State::Dead),
-                Cell::new(State::Live),
-                Cell::new(State::Dead),
-            ],
-            vec![
-                Cell::new(State::Dead),
-                Cell::new(State::Live),
-                Cell::new(State::Dead),
-            ],
-        ]);
+    fn seed(&mut self, size: usize) {
+        let mut rng = rand::thread_rng();
+
+        let cells = (0..size)
+            .map(|_| {
+                (0..size)
+                    .map(|_| {
+                        let state = if rng.gen_bool(0.5) {
+                            State::Live
+                        } else {
+                            State::Dead
+                        };
+                        Cell::new(state)
+                    })
+                    .collect::<Vec<Cell>>()
+            })
+            .collect::<Vec<Vec<Cell>>>();
+
+        self.board = Board::new(cells);
     }
 
     fn run_one_generation(&mut self) {
