@@ -41,7 +41,7 @@ impl BoardRenderer for TerminalBoardRenderer {
             .map(|_| {
                 (0..size.cols())
                     .map(|_| {
-                        let state = if rng.gen_bool(0.5) {
+                        let state = if rng.gen_bool(0.55) {
                             State::Live
                         } else {
                             State::Dead
