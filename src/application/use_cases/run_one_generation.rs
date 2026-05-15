@@ -4,10 +4,16 @@ use crate::domain::board::Board;
 use crate::domain::state::State;
 
 pub fn run_one_generation(board: &mut Board) -> &mut Board {
-    let living_neighbours = *board.get_living_neighbour();
+    let current_generation = Board::new(board.cells().clone());
+    let row_count = board.cells().len();
 
-    for row in board.cells_mut().iter_mut() {
-        for cell in row.iter_mut() {
+    for row in 0..row_count {
+        let col_count = board.cells()[row].len();
+
+        for col in 0..col_count {
+            let living_neighbours = current_generation.get_living_neighbour_cell(row, col);
+            let cell = &mut board.cells_mut()[row][col];
+
             match cell.state() {
                 State::Live => {
                     handle_living_cell(cell, &living_neighbours);

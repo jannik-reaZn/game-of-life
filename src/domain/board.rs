@@ -21,4 +21,9 @@ impl Board {
         // Placeholder for counting living neighbours
         &0
     }
+
+    pub fn get_living_neighbour_cell(&self, row: usize, col: usize) -> usize {
+        // Placeholder for counting living neighbour cells
+        0
+    }
 }

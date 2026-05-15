@@ -44,5 +44,5 @@ fn test_get_living_neighbour(sample_cells: Vec<Vec<Cell>>) {
     let living_neighbours = board.get_living_neighbour();
 
     // THEN
-    assert_eq!(*living_neighbours, 0); // Placeholder assertion
+    assert_eq!(*living_neighbours, 0);
 }
