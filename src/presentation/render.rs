@@ -12,7 +12,7 @@ pub fn run() {
     // Initialize board renderer
     let mut board_renderer = TerminalBoardRenderer::new();
 
-    // Seed initial board
+    // Initialize board
     board_renderer.seed(BoardSize::square(BOARD_SIZE));
 
     for generation in 0..=MAX_ITERATIONS {

@@ -13,7 +13,7 @@ pub fn run_one_generation(board: &mut Board) -> &mut Board {
 
         for col in 0..col_count {
             let living_neighbours =
-                current_generation.get_living_neighbour(Position::new(row, col));
+                current_generation.get_living_neighbours(Position::new(row, col));
             let cell = &mut board.cells_mut()[row][col];
 
             match cell.state() {

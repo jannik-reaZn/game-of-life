@@ -19,7 +19,7 @@ impl Board {
         &mut self.cells
     }
 
-    pub fn get_living_neighbour(&self, position: Position) -> usize {
+    pub fn get_living_neighbours(&self, position: Position) -> usize {
         self.get_neighbour_cells(position)
             .iter()
             .filter(|cell| cell.state() == State::Live)
@@ -34,6 +34,7 @@ impl Board {
         let mut neighbours: Vec<Cell> = Vec::new();
         for row_dir in &directions {
             for col_dir in &directions {
+                // Center cell is not a neighbour
                 if *row_dir == 0 && *col_dir == 0 {
                     continue;
                 }
@@ -41,6 +42,7 @@ impl Board {
                 let new_row = row as isize + row_dir;
                 let new_col = col as isize + col_dir;
 
+                // Check for out of bounds
                 if new_row < 0 || new_col < 0 {
                     continue;
                 }
@@ -55,6 +57,7 @@ impl Board {
                     continue;
                 }
 
+                // Valid neighbours can be added to list
                 neighbours.push(self.cells[new_row][new_col].clone());
             }
         }

@@ -50,13 +50,13 @@ fn test_board_mutation(sample_cells: Vec<Vec<Cell>>) {
 }
 
 #[rstest]
-fn test_get_living_neighbour(sample_cells: Vec<Vec<Cell>>) {
+fn test_get_living_neighbours(sample_cells: Vec<Vec<Cell>>) {
     // GIVEN
     let board = Board::new(sample_cells.clone());
 
     // WHEN
-    let living_neighbours_cell_0_0 = board.get_living_neighbour(Position::new(0, 0));
-    let living_neighbours_cell_0_1 = board.get_living_neighbour(Position::new(0, 1));
+    let living_neighbours_cell_0_0 = board.get_living_neighbours(Position::new(0, 0));
+    let living_neighbours_cell_0_1 = board.get_living_neighbours(Position::new(0, 1));
 
     // THEN
     assert_eq!(living_neighbours_cell_0_0, 1);
@@ -70,13 +70,12 @@ fn test_get_neighbour_cells(sample_cells: Vec<Vec<Cell>>) {
 
     // WHEN
     let neighbour_cells = board.get_neighbour_cells(Position::new(1, 1));
-
-    // THEN
     let living_neighbours = neighbour_cells
         .iter()
         .filter(|cell| cell.state() == State::Live)
         .count();
 
+    // THEN
     assert_eq!(neighbour_cells.len(), 8);
     assert_eq!(living_neighbours, 2);
 }
