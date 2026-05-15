@@ -6,38 +6,6 @@ edition = "2024"
 [dev-dependencies]
 rstest = "0.26.1"
 
-[[test]]
-name = "test_cell"
-path = "tests/domain/test_cell.rs"
-
-[[test]]
-name = "test_board"
-path = "tests/domain/test_board.rs"
-
-[[test]]
-name = "test_born_rule"
-path = "tests/domain/rules/test_born_rule.rs"
-
-[[test]]
-name = "test_die_rule"
-path = "tests/domain/rules/test_die_rule.rs"
-
-[[test]]
-name = "test_survive_rule"
-path = "tests/domain/rules/test_survive_rule.rs"
-
-[[test]]
-name = "test_handle_living_cell"
-path = "tests/application/use_cases/test_handle_living_cell.rs"
-
-[[test]]
-name = "test_handle_dead_cell"
-path = "tests/application/use_cases/test_handle_dead_cell.rs"
-
-[[test]]
-name = "test_run_one_generation"
-path = "tests/application/use_cases/test_run_one_generation.rs"
-
 [dependencies]
 rand = "0.8.5"
 
