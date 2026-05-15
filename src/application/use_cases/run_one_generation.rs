@@ -11,7 +11,7 @@ pub fn run_one_generation(board: &mut Board) -> &mut Board {
         let col_count = board.cells()[row].len();
 
         for col in 0..col_count {
-            let living_neighbours = current_generation.get_living_neighbour_cell(row, col);
+            let living_neighbours = current_generation.get_living_neighbour(row, col);
             let cell = &mut board.cells_mut()[row][col];
 
             match cell.state() {
