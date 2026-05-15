@@ -1,6 +1,7 @@
 use crate::application::use_cases::handle_dead_cell_use_case::handle_dead_cell;
 use crate::application::use_cases::handle_living_cell_use_case::handle_living_cell;
 use crate::domain::board::Board;
+use crate::domain::position::Position;
 use crate::domain::state::State;
 
 pub fn run_one_generation(board: &mut Board) -> &mut Board {
@@ -11,7 +12,8 @@ pub fn run_one_generation(board: &mut Board) -> &mut Board {
         let col_count = board.cells()[row].len();
 
         for col in 0..col_count {
-            let living_neighbours = current_generation.get_living_neighbour(row, col);
+            let living_neighbours =
+                current_generation.get_living_neighbour(Position::new(row, col));
             let cell = &mut board.cells_mut()[row][col];
 
             match cell.state() {

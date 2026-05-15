@@ -1,4 +1,5 @@
 use crate::domain::cell::Cell;
+use crate::domain::position::Position;
 use crate::domain::state::State;
 
 pub struct Board {
@@ -18,15 +19,17 @@ impl Board {
         &mut self.cells
     }
 
-    pub fn get_living_neighbour(&self, row: usize, col: usize) -> usize {
-        self.get_neighbour_cells(row, col)
+    pub fn get_living_neighbour(&self, position: Position) -> usize {
+        self.get_neighbour_cells(position)
             .iter()
             .filter(|cell| cell.state() == State::Live)
             .count()
     }
 
-    pub fn get_neighbour_cells(&self, row: usize, col: usize) -> Vec<Cell> {
+    pub fn get_neighbour_cells(&self, position: Position) -> Vec<Cell> {
         let directions = [-1isize, 0, 1];
+        let row = position.row();
+        let col = position.col();
 
         let mut neighbours: Vec<Cell> = Vec::new();
         for row_dir in &directions {

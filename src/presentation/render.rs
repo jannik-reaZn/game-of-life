@@ -1,3 +1,4 @@
+use crate::domain::board_size::BoardSize;
 use crate::presentation::board_renderer::{BoardRenderer, TerminalBoardRenderer};
 use std::io::{self, Write};
 use std::thread;
@@ -12,7 +13,7 @@ pub fn run() {
     let mut board_renderer = TerminalBoardRenderer::new();
 
     // Seed initial board
-    board_renderer.seed(BOARD_SIZE);
+    board_renderer.seed(BoardSize::square(BOARD_SIZE));
 
     for generation in 0..=MAX_ITERATIONS {
         // Clear screen and move cursor to top-left for a smooth frame-by-frame animation.

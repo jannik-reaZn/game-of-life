@@ -1,5 +1,6 @@
 use game_of_life::domain::board::Board;
 use game_of_life::domain::cell::Cell;
+use game_of_life::domain::position::Position;
 use game_of_life::domain::state::State;
 use rstest::{fixture, rstest};
 
@@ -54,8 +55,8 @@ fn test_get_living_neighbour(sample_cells: Vec<Vec<Cell>>) {
     let board = Board::new(sample_cells.clone());
 
     // WHEN
-    let living_neighbours_cell_0_0 = board.get_living_neighbour(0, 0);
-    let living_neighbours_cell_0_1 = board.get_living_neighbour(0, 1);
+    let living_neighbours_cell_0_0 = board.get_living_neighbour(Position::new(0, 0));
+    let living_neighbours_cell_0_1 = board.get_living_neighbour(Position::new(0, 1));
 
     // THEN
     assert_eq!(living_neighbours_cell_0_0, 1);
@@ -68,7 +69,7 @@ fn test_get_neighbour_cells(sample_cells: Vec<Vec<Cell>>) {
     let board = Board::new(sample_cells.clone());
 
     // WHEN
-    let neighbour_cells = board.get_neighbour_cells(1, 1);
+    let neighbour_cells = board.get_neighbour_cells(Position::new(1, 1));
 
     // THEN
     let living_neighbours = neighbour_cells

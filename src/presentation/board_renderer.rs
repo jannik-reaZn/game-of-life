@@ -1,5 +1,6 @@
 use crate::application::use_cases::run_one_generation::run_one_generation as advance_board;
 use crate::domain::board::Board;
+use crate::domain::board_size::BoardSize;
 use crate::domain::cell::Cell;
 use crate::domain::state::State;
 use crate::presentation::cell_renderer::{CellStateRenderer, Renderable};
@@ -7,7 +8,7 @@ use rand::Rng;
 
 // Interface for rendering the board
 pub trait BoardRenderer {
-    fn seed(&mut self, size: usize);
+    fn seed(&mut self, size: BoardSize);
     fn run_one_generation(&mut self);
     fn render(&self) -> String;
 }
@@ -33,12 +34,12 @@ impl TerminalBoardRenderer {
 
 // Implement the BoardRenderer trait for TerminalBoardRenderer
 impl BoardRenderer for TerminalBoardRenderer {
-    fn seed(&mut self, size: usize) {
+    fn seed(&mut self, size: BoardSize) {
         let mut rng = rand::thread_rng();
 
-        let cells = (0..size)
+        let cells = (0..size.rows())
             .map(|_| {
-                (0..size)
+                (0..size.cols())
                     .map(|_| {
                         let state = if rng.gen_bool(0.5) {
                             State::Live
