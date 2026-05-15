@@ -1,6 +1,6 @@
 use super::state::State;
 
-#[derive(Clone)]
+#[derive(Clone, Debug, PartialEq)]
 pub struct Cell {
     state: State,
 }
