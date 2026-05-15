@@ -21,6 +21,14 @@ impl Cell {
         self.state = state;
     }
 
+    pub fn is_alive(&self) -> bool {
+        self.state == State::Live
+    }
+
+    pub fn is_dead(&self) -> bool {
+        self.state == State::Dead
+    }
+
     pub fn neighbours(&self) -> &Vec<Cell> {
         &self.neighbours
     }

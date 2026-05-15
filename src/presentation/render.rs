@@ -1,7 +1,13 @@
+use crate::presentation::board_renderer::{BoardRenderer, TerminalBoardRenderer};
+
 pub fn run() {
-    println!("Running the game...");
-    // for lifeable cell, print "O", for non-lifeable cell, print "."
-    println!(". . .");
-    println!(". O .");
-    println!(". . .");
+    // Initialize board renderer
+    let mut board_renderer = TerminalBoardRenderer::new();
+
+    // Seed the board and render it
+    board_renderer.seed();
+
+    // Render the board and print the output
+    let output = board_renderer.render();
+    println!("{}", output);
 }
