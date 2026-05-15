@@ -6,12 +6,13 @@ use rstest::rstest;
 #[rstest]
 #[case(2)]
 #[case(3)]
-fn test_handle_living_cell(#[case] living_cells: usize) {
+fn test_handle_living_cell_stays_alive(#[case] living_neighbours: usize) {
     // GIVEN
-    let mut cell = Cell::new(State::Live, Cell::create_neighbours(living_cells));
+    let mut cell = Cell::new(State::Live);
+    let living_neighbours = living_neighbours;
 
     // WHEN
-    handle_living_cell(&mut cell);
+    handle_living_cell(&mut cell, &living_neighbours);
 
     // THEN
     assert_eq!(cell.state(), State::Live);
@@ -22,30 +23,25 @@ fn test_handle_living_cell(#[case] living_cells: usize) {
 #[case(1)]
 #[case(4)]
 #[case(8)]
-fn test_handle_living_cell_bad(#[case] living_cells: usize) {
+fn test_handle_living_cell_dies(#[case] living_neighbours: usize) {
     // GIVEN
-    let mut cell = Cell::new(State::Live, Cell::create_neighbours(living_cells));
+    let mut cell = Cell::new(State::Live);
 
     // WHEN
-    handle_living_cell(&mut cell);
+    handle_living_cell(&mut cell, &living_neighbours);
 
     // THEN
-    assert_eq!(
-        cell.neighbours()
-            .iter()
-            .filter(|neighbour| neighbour.state() == State::Live)
-            .count(),
-        living_cells
-    );
+    assert_eq!(cell.state(), State::Dead);
 }
 
 #[test]
 fn test_handle_living_cell_when_cell_is_dead_does_not_change_state() {
     // GIVEN
-    let mut cell = Cell::new(State::Dead, Cell::create_neighbours(1));
+    let mut cell = Cell::new(State::Dead);
+    let living_neighbours = 1;
 
     // WHEN
-    handle_living_cell(&mut cell);
+    handle_living_cell(&mut cell, &living_neighbours);
 
     // THEN
     assert_eq!(cell.state(), State::Dead);

@@ -6,10 +6,11 @@ use rstest::rstest;
 #[test]
 fn test_dead_cell_is_born() {
     // GIVEN
-    let cell = Cell::new(State::Dead, Cell::create_neighbours(3));
+    let cell = Cell::new(State::Dead);
+    let living_neighbours = 3;
 
     // WHEN
-    let shoud_be_born = should_be_born(&cell);
+    let shoud_be_born = should_be_born(&cell, &living_neighbours);
 
     // THEN
     assert_eq!(shoud_be_born, true);
@@ -18,12 +19,12 @@ fn test_dead_cell_is_born() {
 #[rstest]
 #[case(2)]
 #[case(4)]
-fn test_dead_cell_stays_dead(#[case] living_cells: usize) {
+fn test_dead_cell_stays_dead(#[case] living_neighbours: usize) {
     // GIVEN
-    let cell = Cell::new(State::Dead, Cell::create_neighbours(living_cells));
+    let cell = Cell::new(State::Dead);
 
     // WHEN
-    let should_be_born = should_be_born(&cell);
+    let should_be_born = should_be_born(&cell, &living_neighbours);
 
     // THEN
     assert_eq!(should_be_born, false);
@@ -32,10 +33,11 @@ fn test_dead_cell_stays_dead(#[case] living_cells: usize) {
 #[test]
 fn test_living_cell_stays_alive() {
     // GIVEN
-    let cell = Cell::new(State::Live, Cell::create_neighbours(1));
+    let cell = Cell::new(State::Live);
+    let living_neighbours = 1;
 
     // WHEN
-    let should_be_born = should_be_born(&cell);
+    let should_be_born = should_be_born(&cell, &living_neighbours);
 
     // THEN
     assert_eq!(should_be_born, false);

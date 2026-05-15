@@ -1,69 +1,28 @@
 use game_of_life::domain::cell::Cell;
 use game_of_life::domain::state::State;
-
 use rstest::rstest;
 
-#[test]
-fn test_cell_state() {
+#[rstest]
+#[case(State::Live)]
+#[case(State::Dead)]
+fn test_cell_state(#[case] state: State) {
     // GIVEN
-    let cell = Cell::new(State::Dead, Vec::new());
+    let cell = Cell::new(state);
 
     // THEN
-    assert_eq!(cell.state(), State::Dead);
-    assert!(cell.neighbours().is_empty());
-}
-
-#[test]
-fn test_cell_neighbours() {
-    // GIVEN
-    let cell = Cell::new(State::Live, Cell::create_neighbours(1));
-
-    // THEN
-    assert_eq!(cell.state(), State::Live);
-    assert_eq!(cell.neighbours().len(), 8);
-}
-
-#[test]
-fn test_create_neighbours_factory() {
-    // GIVEN
-    let neighbours = Cell::create_neighbours(3);
-
-    // THEN
-    assert_eq!(neighbours.len(), 8);
-    assert_eq!(
-        neighbours
-            .iter()
-            .filter(|neighbour| neighbour.state() == State::Live)
-            .count(),
-        3
-    );
-}
-
-#[test]
-fn test_set_cell_state() {
-    // GIVEN
-    let mut cell = Cell::new(State::Live, Vec::new());
-    assert_eq!(cell.state(), State::Live);
-
-    // WHEN
-    cell.set_state(State::Dead);
-
-    // THEN
-    assert_eq!(cell.state(), State::Dead);
+    assert_eq!(cell.state(), state);
 }
 
 #[rstest]
-#[case(1)]
-#[case(4)]
-#[case(8)]
-fn test_count_living_neighbour_cell(#[case] living_cells: usize) {
+#[case(State::Live, State::Dead)]
+#[case(State::Dead, State::Live)]
+fn test_set_cell_state(#[case] initial_state: State, #[case] new_state: State) {
     // GIVEN
-    let neighbours = Cell::create_neighbours(living_cells);
-    let cell = Cell::new(State::Live, neighbours);
+    let mut cell = Cell::new(initial_state);
 
     // WHEN
-    let counted_living_cells = cell.count_living_neighbour_cells();
+    cell.set_state(new_state);
 
     // THEN
-    assert_eq!(counted_living_cells, living_cells)
+    assert_eq!(cell.state(), new_state);
 }

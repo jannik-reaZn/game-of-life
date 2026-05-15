@@ -29,19 +29,19 @@ impl BoardRenderer for TerminalBoardRenderer {
     fn seed(&mut self) {
         self.board = Board::new(vec![
             vec![
-                Cell::new(State::Dead, Cell::create_neighbours(0)),
-                Cell::new(State::Live, Cell::create_neighbours(1)),
-                Cell::new(State::Dead, Cell::create_neighbours(0)),
+                Cell::new(State::Dead),
+                Cell::new(State::Live),
+                Cell::new(State::Dead),
             ],
             vec![
-                Cell::new(State::Dead, Cell::create_neighbours(3)),
-                Cell::new(State::Live, Cell::create_neighbours(2)),
-                Cell::new(State::Dead, Cell::create_neighbours(3)),
+                Cell::new(State::Dead),
+                Cell::new(State::Live),
+                Cell::new(State::Dead),
             ],
             vec![
-                Cell::new(State::Dead, Cell::create_neighbours(0)),
-                Cell::new(State::Live, Cell::create_neighbours(1)),
-                Cell::new(State::Dead, Cell::create_neighbours(0)),
+                Cell::new(State::Dead),
+                Cell::new(State::Live),
+                Cell::new(State::Dead),
             ],
         ]);
     }

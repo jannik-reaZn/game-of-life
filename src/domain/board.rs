@@ -16,4 +16,9 @@ impl Board {
     pub fn cells_mut(&mut self) -> &mut Vec<Vec<Cell>> {
         &mut self.cells
     }
+
+    pub fn get_living_neighbour(&self) -> &usize {
+        // Placeholder for counting living neighbours
+        &0
+    }
 }

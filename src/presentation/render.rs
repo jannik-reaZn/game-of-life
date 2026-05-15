@@ -13,4 +13,9 @@ pub fn run() {
     board_renderer.run_one_generation();
     println!("\nAfter one generation:");
     println!("{}", board_renderer.render());
+
+    // Run one generation and render again
+    board_renderer.run_one_generation();
+    println!("\nAfter one generation:");
+    println!("{}", board_renderer.render());
 }

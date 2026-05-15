@@ -4,14 +4,16 @@ use crate::domain::board::Board;
 use crate::domain::state::State;
 
 pub fn run_one_generation(board: &mut Board) -> &mut Board {
+    let living_neighbours = *board.get_living_neighbour();
+
     for row in board.cells_mut().iter_mut() {
         for cell in row.iter_mut() {
             match cell.state() {
                 State::Live => {
-                    handle_living_cell(cell);
+                    handle_living_cell(cell, &living_neighbours);
                 }
                 State::Dead => {
-                    handle_dead_cell(cell);
+                    handle_dead_cell(cell, &living_neighbours);
                 }
             }
         }

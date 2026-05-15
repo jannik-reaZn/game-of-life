@@ -6,10 +6,11 @@ use rstest::rstest;
 #[test]
 fn test_handle_dead_cell_revives_when_exactly_three_neighbours_are_live() {
     // GIVEN
-    let mut cell = Cell::new(State::Dead, Cell::create_neighbours(3));
+    let mut cell = Cell::new(State::Dead);
+    let living_neighbours = 3;
 
     // WHEN
-    handle_dead_cell(&mut cell);
+    handle_dead_cell(&mut cell, &living_neighbours);
 
     // THEN
     assert_eq!(cell.state(), State::Live);
@@ -19,13 +20,13 @@ fn test_handle_dead_cell_revives_when_exactly_three_neighbours_are_live() {
 #[case(2)]
 #[case(4)]
 fn test_handle_dead_cell_stays_dead_when_live_neighbour_count_is_not_three(
-    #[case] living_cells: usize,
+    #[case] living_neighbours: usize,
 ) {
     // GIVEN
-    let mut cell = Cell::new(State::Dead, Cell::create_neighbours(living_cells));
+    let mut cell = Cell::new(State::Dead);
 
     // WHEN
-    handle_dead_cell(&mut cell);
+    handle_dead_cell(&mut cell, &living_neighbours);
 
     // THEN
     assert_eq!(cell.state(), State::Dead);
@@ -34,10 +35,11 @@ fn test_handle_dead_cell_stays_dead_when_live_neighbour_count_is_not_three(
 #[test]
 fn test_handle_dead_cell_keeps_live_cell_unchanged() {
     // GIVEN
-    let mut cell = Cell::new(State::Live, Cell::create_neighbours(1));
+    let mut cell = Cell::new(State::Live);
+    let living_neighbours = 1;
 
     // WHEN
-    handle_dead_cell(&mut cell);
+    handle_dead_cell(&mut cell, &living_neighbours);
 
     // THEN
     assert_eq!(cell.state(), State::Live);
