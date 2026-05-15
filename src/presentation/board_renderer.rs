@@ -16,6 +16,12 @@ pub struct TerminalBoardRenderer {
     board: Board,
 }
 
+impl Default for TerminalBoardRenderer {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl TerminalBoardRenderer {
     pub fn new() -> Self {
         TerminalBoardRenderer {
