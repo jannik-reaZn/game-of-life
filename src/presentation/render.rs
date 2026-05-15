@@ -5,7 +5,7 @@ use std::time::Duration;
 
 pub fn run() {
     const BOARD_SIZE: usize = 30;
-    const MAX_ITERATIONS: usize = 100;
+    const MAX_ITERATIONS: usize = 500;
     const FRAME_DELAY_MS: u64 = 120;
 
     // Initialize board renderer
