@@ -1,3 +1,4 @@
+use crate::application::use_cases::run_one_generation::run_one_generation as advance_board;
 use crate::domain::board::Board;
 use crate::domain::cell::Cell;
 use crate::domain::state::State;
@@ -6,6 +7,7 @@ use crate::presentation::cell_renderer::{CellStateRenderer, Renderable};
 // Interface for rendering the board
 pub trait BoardRenderer {
     fn seed(&mut self);
+    fn run_one_generation(&mut self);
     fn render(&self) -> String;
 }
 
@@ -42,6 +44,10 @@ impl BoardRenderer for TerminalBoardRenderer {
                 Cell::new(State::Dead, Cell::create_neighbours(0)),
             ],
         ]);
+    }
+
+    fn run_one_generation(&mut self) {
+        advance_board(&mut self.board);
     }
 
     fn render(&self) -> String {
