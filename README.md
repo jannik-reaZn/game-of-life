@@ -3,7 +3,7 @@ This is a hobby project to implement Conway's Game of Life in Rust. The implemen
 
 The goal of this project is to learn Rust and to have fun. :)
 
-# Screenshots
+# Example
 
 ```bash
 Generation 4/500:
